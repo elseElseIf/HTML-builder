@@ -1,11 +1,9 @@
 const fs = require("fs"); //импорт fs
 const path = require("path"); //импорт path
 
-fs.readFile(
-    path.join(__dirname, "text.txt"),
-    "utf-8",
-    (err,data) => {
-        if(err) throw err;
-        console.log(data);
-    }
-)
+const stream = fs.createReadStream(path.join(__dirname,"text.txt"), 'utf8');
+stream.on('data', function(chunk) { 
+    data = chunk; 
+    }).on('end', function() { 
+    console.log(data); 
+ }); 
